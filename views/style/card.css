@@ -103,14 +103,15 @@
     padding: 20px;
     outline: none;
     font-size: 17px;
-    background: white;
+    color: white;
+    background: #ffffff;
     font-weight: 400;
     font-family: 'Inter', sans-serif;
     transition: .3s ease-in-out;
 }
 
 .cM-wrap input::placeholder {
-    color: #333;
+    color: #ffffff;
 }
 
 .card.active {
@@ -124,10 +125,6 @@
 .card.active .card-mask svg {opacity: 0;}
 .card.active .card-title {opacity: 0;}
 
-.card.active .card-mask {
-    height: 100%;
-}
-
 .card.active .cM-wrap {
     margin: 0px;
     width: 100%;
@@ -136,5 +133,6 @@
 .card.active .cM-wrap input {
     pointer-events: visible;
     width: calc(100% - 40px);
+    padding: 22px;
     border-radius: 0px;
 }

@@ -16,6 +16,10 @@ for (let i = 0; i < card.length; i++)
 
         window.history.pushState({}, "", window.location.pathname + link);
 
+        let colorInput = parentElem.childNodes[1].childNodes[0].childNodes[0].getAttribute("fill");
+        let input = parentElem.children[1].children[1].children[1];
+        input.style.background = colorInput;
+
         parentElem.classList.add("active");
         parentElem.style.zIndex = `9999`;
         setTimeout(() => {public.style.overflow = `hidden`;}, 300);
@@ -35,5 +39,8 @@ for (let i = 0; i < card.length; i++)
         parentElem.classList.remove("active");
         setTimeout(() => {parentElem.style.zIndex = `0`;}, 300);
         public.style = ``;
+
+        let input = parentElem.children[1].children[1].children[1];
+        input.style.background = `white`;
     })
 }
