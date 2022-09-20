@@ -1,0 +1,140 @@
+#public > div {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    height: 185px;
+}
+
+.card {
+    display: grid;
+    grid-template-areas: "a a";
+    grid-template-columns: 70%;
+    position: absolute;
+    max-width: 505px;
+    width: calc(100% - 20px);
+    height: 185px;
+    border-radius: 17px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+}
+
+[data-card="economy"] {background: #ffc528;}
+[data-card="management-technologies"] {background: #2ECC71;}
+[data-card="psychology"] {background: #5499C7;}
+[data-card="organization-theory"] {background: #EC7063;}
+[data-card="business-statistics"] {background: #AF7AC5;}
+[data-card="cross-cultural"] {background: #E59866;}
+[data-card="human-resources"] {background: #B0BEC5;}
+
+.card-left,.cL-wrap {
+    height: 100%;
+}
+
+.cL-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-title {
+    margin-top: 17px;
+    margin-left: 17PX;
+    width: 100%;
+    font-size: 22px;
+    font-weight: 600;
+    color: #333;
+    /*word-break: break-all;*/
+}
+.card-title,
+.card-mask svg {
+    transition: .3s ease-in-out;
+}
+
+.cLw-msg {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin: 7px 16px;
+    height: 100%;
+    overflow: hidden;
+}
+
+.text-box {
+    margin-bottom: 5px;
+    max-width: 300px;
+    padding: 3px;
+    border-radius: 6px;
+    background: #fff;
+    word-break: break-all;
+}
+
+.cLw-msg .text-box span {
+    font-size: 12px;
+    color: #333;
+}
+
+.card-mask {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-end;
+    height: 100%;
+}
+
+.cM-wrap {
+    margin: 10px;
+    transition: .3s ease-in-out;
+}
+.cM-wrap svg {
+    position: absolute;
+    margin: 9px 14px;
+    padding: 7px;
+    fill: #333;
+    background: white;
+}
+
+.cM-wrap input {
+    pointer-events: none;
+    width: 10px;
+    height: 10px;
+    border: none;
+    border-radius: 50px;
+    padding: 20px;
+    outline: none;
+    font-size: 17px;
+    background: white;
+    font-weight: 400;
+    font-family: 'Inter', sans-serif;
+    transition: .3s ease-in-out;
+}
+
+.cM-wrap input::placeholder {
+    color: #333;
+}
+
+.card.active {
+    grid-template-columns: 0%;
+    top: 0 !important;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+}
+
+.card.active .card-mask svg {opacity: 0;}
+.card.active .card-title {opacity: 0;}
+
+.card.active .card-mask {
+    height: 100%;
+}
+
+.card.active .cM-wrap {
+    margin: 0px;
+    width: 100%;
+}
+
+.card.active .cM-wrap input {
+    pointer-events: visible;
+    width: calc(100% - 40px);
+    border-radius: 0px;
+}

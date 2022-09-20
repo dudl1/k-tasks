@@ -1,0 +1,50 @@
+{
+    "economy":[
+        {"msg": "Привет"},
+        {"msg": "как дела задание"},
+        {"msg": "324342 ауцауц"}
+    ],
+
+    "management-technologies":
+    [
+        {"msg": "hello 213"},
+        {"msg": "кто где"},
+        {"msg": "это экономика"}
+    ],
+
+    "psychology":
+    [
+        {"msg": "hello 213"},
+        {"msg": "кто где"},
+        {"msg": "это экономика"}
+    ],
+    
+    "organization-theory":
+    [
+        {"msg": "hello 213"},
+        {"msg": "кто где"},
+        {"msg": "это экономика"}
+    ],
+
+    "business-statistics":
+    [
+        {"msg": "hello 213"},
+        {"msg": "кто где"},
+        {"msg": "это экономика"},
+        {"msg": "БИЗНЕС ПРОЦЕССЫ"}
+    ],
+
+    "cross-cultural":
+    [
+        {"msg": "hello 213"},
+        {"msg": "кто где"},
+        {"msg": "это экономика"}
+    ],
+
+    "human-resources":
+    [
+        {"msg": "hello 213"},
+        {"msg": "кто где"},
+        {"msg": "это экономика"}
+    ]
+}
