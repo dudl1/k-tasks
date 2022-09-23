@@ -16,16 +16,35 @@ app.get("/", (req, res) =>
 app.post("/:link", (req, res) =>
 {
     let link = req.params;
+
     let pathLink = link.link;
+    let userMsg = req.body.userMsg;
 
-    fs.readFile("db.json", (error, data)=>
+    const addMsg = {
+        "id": Date.now(),
+        "msg": userMsg
+    }
+
+    function writeMsg(addMsg)
     {
-        let parseJSON = JSON.parse(data);
-        let stringJSON = JSON.stringify(parseJSON[`${pathLink}`]);
+        fs.readFile("db.json", function(error, data)
+        {
 
-        console.log(stringJSON);
-    })
+            let json = data.toString();
+            json = JSON.parse(json);
+            console.log(json);
 
+            json.economy.push(addMsg);
+
+            const str = JSON.stringify(json);
+
+            fs.writeFile('db.json', str, function(err)
+            {
+                console.log('---------- успешно добавлено -------------');
+            })
+        })
+    }
+    writeMsg(addMsg);
 });
 
 
