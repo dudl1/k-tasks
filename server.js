@@ -7,6 +7,7 @@ const io = new Server(server);
 const fs = require("fs");
 const { v4: uuid4 } = require("uuid");
 
+const PORT = process.env.PORT || 80;
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/views/index.html');
@@ -50,4 +51,4 @@ io.on("connection", (socket)=>
 })
 
 
-server.listen(80, () => { console.log("Start");});
+app.listen(PORT,()=>{console.log("Started");});
