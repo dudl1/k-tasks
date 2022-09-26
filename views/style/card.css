@@ -51,29 +51,6 @@
     transition: .3s ease-in-out;
 }
 
-.cLw-msg {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    margin: 7px 16px;
-    height: 100%;
-    overflow: hidden;
-}
-
-.text-box {
-    margin-bottom: 5px;
-    max-width: 300px;
-    padding: 3px;
-    border-radius: 6px;
-    background: #fff;
-    word-break: break-all;
-}
-
-.cLw-msg .text-box span {
-    font-size: 12px;
-    color: #333;
-}
-
 .card-mask {
     display: flex;
     justify-content: space-between;
@@ -118,6 +95,42 @@
     color: #ffffff;
 }
 
+.containerMsg {
+    display: flex;
+    flex-direction: column-reverse;
+    position: absolute;
+    margin-top: 10px;
+    height: calc(100% - 70px);
+    padding-right: 40px;
+    background: #fffefe00;
+    z-index: -99;
+    opacity: 0;
+    overflow-y: scroll;
+    transition: .2s ease-in-out;
+}
+
+.containerMsg > div {
+    margin-left: 20px;
+    margin-bottom: 13px;
+    max-width: 350px;
+    padding: 9px;
+    border-radius: 10px;
+    word-wrap: break-word;
+    color: #333333;
+    fill: #333333;
+    background: #fff;
+}
+
+.lineMsg {
+    margin-top: 6px;
+    width: 100%;
+    height: 1px;
+    background: #dfdfdf;
+}
+
+.dateToMsg {display: flex;margin-top:7px;}
+.dateToMsg > svg {fill: #333333;opacity:1!important;;}
+
 .card.active {
     grid-template-columns: 0%;
     top: 0 !important;
@@ -126,6 +139,16 @@
     border-radius: 0;
 }
 
+.card.active .card-mask {
+    animation: noas forwards;
+    animation-duration: .9s;
+    animation-delay: 0;
+}
+@keyframes noas {
+    100% {
+        align-items: flex-start;
+    }
+}
 .card.active .card-mask svg {opacity: 0;}
 .card.active .card-title {opacity: 0;}
 
@@ -144,4 +167,11 @@
 
 .card.active .cM-wrap {
     background: #ffffff00;
+}
+
+.card.active .containerMsg {
+    align-items: flex-start;
+    opacity: 1;
+    z-index: 0;
+    transition-delay: .5s;
 }

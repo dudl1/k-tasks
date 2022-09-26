@@ -1,51 +1,53 @@
-const express = require("express"),
-      fs = require("fs");
-
-const PORT = process.env.PORT || 80;
-
+const express = require('express');
 const app = express();
-const jsonParser = express.json();
-app.use(express.urlencoded({ extended: true }));
+const http = require("http");
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server);
+const fs = require("fs");
+const { v4: uuid4 } = require("uuid");
 
 
-app.get("/", (req, res) =>
-{
-    res.sendFile(__dirname + "/views/index.html",'utf-8');
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/views/index.html');
 });
 
-app.post("/:link", (req, res) =>
+const users = {};
+io.on("connection", (socket)=>
 {
-    let link = req.params;
+    const id = uuid4();
+    users[id] = io;
 
-    let pathLink = link.link;
-    let userMsg = req.body.userMsg;
-
-    const addMsg = {
-        "id": Date.now(),
-        "msg": userMsg
-    }
-
-    function writeMsg(addMsg)
+    fs.readFile("db.json", function(error, data)
     {
+        const dataJSON = data.toString();
+        socket.send(JSON.parse(dataJSON));
+    })
+
+    socket.on("chat message", (msg)=>
+    {
+        io.emit("message", msg);
+
         fs.readFile("db.json", function(error, data)
         {
-
             let json = data.toString();
+            let link = msg.link;
+
             json = JSON.parse(json);
-            console.log(json);
+            json[link].push(msg);
 
-            json.economy.push(addMsg);
+            const strJSON = JSON.stringify(json);
 
-            const str = JSON.stringify(json);
-
-            fs.writeFile('db.json', str, function(err)
-            {
-                console.log('---------- успешно добавлено -------------');
-            })
+            fs.writeFile('db.json', strJSON, function(err){})
         })
-    }
-    writeMsg(addMsg);
-});
+
+    });
+
+    socket.on("close", ()=>
+    {
+        delete users[id];
+    })
+})
 
 
-app.listen(PORT,()=>{console.log("Started");});
+server.listen(80, () => { console.log("Start");});

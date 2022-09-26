@@ -1,6 +1,7 @@
+const socket = io();
+
 const public = document.getElementById("public");
 const card = document.querySelectorAll(".card-wrap");
-let form = document.querySelectorAll("form");
 
 for (let i = 0; i < card.length; i++)
 {
@@ -24,32 +25,29 @@ for (let i = 0; i < card.length; i++)
         parentElem.style.zIndex = `9999`;
         setTimeout(() => {public.style.overflow = `hidden`;}, 300);
         $('html, body').animate({scrollTop: $("body").offset().top}, 300);
-
-        $.post(link,
-            {},
-            function (data, status)
-            {
-                console.log(data);
-            }
-        );
         
-        //const form = parentElem.childNodes[1].childNodes[1].childNodes[1];
         input.setAttribute("name", link);
         input.setAttribute("autocomplete", "off");
 
-        input.addEventListener("submit", (e)=>
+        let form = input.parentNode;
+        form.addEventListener("submit", (e)=>
         {
             e.preventDefault();
             e.stopImmediatePropagation();
     
-            let userMsg = input.value;
-            $.post(link,
-                {userMsg: userMsg},
-                function (data, status)
-                {
-                    console.log(data);
-                }
-            );
+            const inputData =
+            {
+                "id": Date.now(),
+                "link": link,
+                "msg": input.value
+            };
+
+            if (input.value)
+            {
+                socket.emit("chat message", inputData);
+                input.value = "";
+            }
+
         })
     })
 
@@ -67,24 +65,7 @@ for (let i = 0; i < card.length; i++)
     })
 }
 
-for (let i = 0; i < form.length; i++)
+socket.on("message", function(msg)
 {
-    const elem = form[i];
-    let input = elem.childNodes[0];
-
-    elem.addEventListener("submit", (e)=>
-    {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        let link = window.location.pathname.replace(/[^a-zа-яё]/gi, '');
-
-        let userMsg = input.value;
-        $.post(link,
-            {userMsg: userMsg},
-            function (data, status)
-            {
-                console.log(data);
-            }
-        );
-    })
-}
+    console.log(msg);
+})
