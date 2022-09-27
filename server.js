@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 const app = express();
 const http = require("http");
 const server = http.createServer(app);
@@ -7,6 +7,8 @@ const io = new Server(server);
 const fs = require("fs");
 const { v4: uuid4 } = require("uuid");
 
+
+const PORT = process.env.PORT || 80;
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/views/index.html');
@@ -50,4 +52,4 @@ io.on("connection", (socket)=>
 })
 
 
-server.listen(80, () => { console.log("Start");});
+server.listen(PORT, () => { console.log("Start");});
