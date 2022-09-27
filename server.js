@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
 });
 
 const users = {};
-io.on("connection", (socket)=>
+/*io.on("connection", (socket)=>
 {
     fs.readFile("db.json", function(error, data)
     {
@@ -40,7 +40,7 @@ io.on("connection", (socket)=>
     socket.on("close", ()=>
     {
     })
-})
+})*/
 
 
 app.listen(PORT,()=>{console.log("Started");});
