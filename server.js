@@ -1,8 +1,6 @@
 const express = require("express");
-const http = require("http");
 const io = new Server(server);
 const fs = require("fs");
-const { v4: uuid4 } = require("uuid");
 
 const app = express();
 const PORT = process.env.PORT || 80;
@@ -14,9 +12,6 @@ app.get('/', (req, res) => {
 const users = {};
 io.on("connection", (socket)=>
 {
-    const id = uuid4();
-    users[id] = io;
-
     fs.readFile("db.json", function(error, data)
     {
         const dataJSON = data.toString();
@@ -44,7 +39,6 @@ io.on("connection", (socket)=>
 
     socket.on("close", ()=>
     {
-        delete users[id];
     })
 })
 
