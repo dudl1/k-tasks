@@ -1,6 +1,6 @@
-const express = require("express");
-const io = new Server(server);
-const fs = require("fs");
+const express = require("express"),
+      io = new Server(server),
+      fs = require("fs");
 
 const app = express();
 const PORT = process.env.PORT || 80;
@@ -9,7 +9,7 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/views/index.html');
 });
 
-const users = {};
+//const users = {};
 /*io.on("connection", (socket)=>
 {
     fs.readFile("db.json", function(error, data)
