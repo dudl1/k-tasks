@@ -1,12 +1,10 @@
-const express = require('express');
-const app = express();
+const express = require("express");
 const http = require("http");
-const server = http.createServer(app);
-const { Server } = require("socket.io");
 const io = new Server(server);
 const fs = require("fs");
 const { v4: uuid4 } = require("uuid");
 
+const app = express();
 const PORT = process.env.PORT || 80;
 
 app.get('/', (req, res) => {
