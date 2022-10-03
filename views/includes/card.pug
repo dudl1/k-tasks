@@ -17,17 +17,10 @@ style
                 <form method="post" id="form">
                     <input type="text" placeholder="Задание">
                 </form>
+                <input type="text" class="inputCalendar" id="input-picker">
+                <svg width="21" height="23" fill="none" class="svgCalendar"><path d="M17.07 2.276H15.93V1.138a1.138 1.138 0 0 0-2.275 0v1.138H6.827V1.138a1.138 1.138 0 1 0-2.276 0v1.138H3.414A3.414 3.414 0 0 0 0 5.69v13.655a3.414 3.414 0 0 0 3.414 3.414h13.655a3.414 3.414 0 0 0 3.414-3.414V5.69a3.414 3.414 0 0 0-3.414-3.414zM3.413 4.552h1.138V5.69a1.138 1.138 0 0 0 2.276 0V4.552h6.827V5.69a1.138 1.138 0 0 0 2.276 0V4.552h1.138a1.138 1.138 0 0 1 1.138 1.138v4.552H2.276V5.69a1.138 1.138 0 0 1 1.138-1.138zm13.655 15.931H3.414a1.138 1.138 0 0 1-1.138-1.138v-6.827h15.931v6.827a1.138 1.138 0 0 1-1.138 1.138z" fill="#fff"/><path d="M5.69 17.07a1.138 1.138 0 1 0 0-2.277 1.138 1.138 0 0 0 0 2.276zM14.793 14.793h-4.551a1.138 1.138 0 1 0 0 2.276h4.551a1.138 1.138 0 0 0 0-2.275z" fill="#fff"/></svg>
             </div>
-            <div class="containerMsg" data-chat="economy">
-                <div>Подготовить конспект к экономике. Добавить решиние по прошлой задаче!</div>
-                <div>Истинные причины 14.РФ
-                    <div class="lineMsg"></div>
-                    <div class="dateToMsg">
-                        <svg width="16" height="18" fill="none"><path d="M13.32 1.776h-.889V.888a.888.888 0 0 0-1.775 0v.888H5.327V.888a.888.888 0 1 0-1.776 0v.888h-.888A2.664 2.664 0 0 0 0 4.44v10.655a2.664 2.664 0 0 0 2.664 2.664h10.655a2.664 2.664 0 0 0 2.664-2.664V4.44a2.664 2.664 0 0 0-2.664-2.664zM2.663 3.552h.888v.888a.888.888 0 1 0 1.776 0v-.888h5.327v.888a.888.888 0 1 0 1.776 0v-.888h.888a.888.888 0 0 1 .888.888v3.552H1.776V4.44a.888.888 0 0 1 .888-.888zm10.655 12.431H2.664a.888.888 0 0 1-.888-.888V9.768h12.431v5.327a.888.888 0 0 1-.888.888z" fill="#333"/><path d="M4.44 13.32a.888.888 0 1 0 0-1.777.888.888 0 0 0 0 1.776zM11.543 11.543H7.992a.888.888 0 1 0 0 1.776h3.551a.888.888 0 0 0 0-1.776z" fill="#333"/></svg>
-                        <span style="margin-left:6px;">23.10.22</span>
-                    </div>
-                </div>
-            </div>
+            <div class="containerMsg" id="economy" data-chat="economy"></div>
         </div>
     </article>
 </div>
@@ -50,8 +43,10 @@ style
                 <form method="post">
                     <input type="text" placeholder="Задание">
                 </form>
+                <input type="text" class="inputCalendar" id="input-picker">
+                <svg width="21" height="23" fill="none" class="svgCalendar"><path d="M17.07 2.276H15.93V1.138a1.138 1.138 0 0 0-2.275 0v1.138H6.827V1.138a1.138 1.138 0 1 0-2.276 0v1.138H3.414A3.414 3.414 0 0 0 0 5.69v13.655a3.414 3.414 0 0 0 3.414 3.414h13.655a3.414 3.414 0 0 0 3.414-3.414V5.69a3.414 3.414 0 0 0-3.414-3.414zM3.413 4.552h1.138V5.69a1.138 1.138 0 0 0 2.276 0V4.552h6.827V5.69a1.138 1.138 0 0 0 2.276 0V4.552h1.138a1.138 1.138 0 0 1 1.138 1.138v4.552H2.276V5.69a1.138 1.138 0 0 1 1.138-1.138zm13.655 15.931H3.414a1.138 1.138 0 0 1-1.138-1.138v-6.827h15.931v6.827a1.138 1.138 0 0 1-1.138 1.138z" fill="#fff"/><path d="M5.69 17.07a1.138 1.138 0 1 0 0-2.277 1.138 1.138 0 0 0 0 2.276zM14.793 14.793h-4.551a1.138 1.138 0 1 0 0 2.276h4.551a1.138 1.138 0 0 0 0-2.275z" fill="#fff"/></svg>
             </div>
-            <div class="containerMsg" data-chat="managementTechnologies"></div>
+            <div class="containerMsg" id="managementTechnologies" data-chat="managementTechnologies"></div>
         </div>
     </article>
 </div>
@@ -74,8 +69,10 @@ style
                 <form method="post">
                     <input type="text" placeholder="Задание">
                 </form>
+                <input type="text" class="inputCalendar" id="input-picker">
+                <svg width="21" height="23" fill="none" class="svgCalendar"><path d="M17.07 2.276H15.93V1.138a1.138 1.138 0 0 0-2.275 0v1.138H6.827V1.138a1.138 1.138 0 1 0-2.276 0v1.138H3.414A3.414 3.414 0 0 0 0 5.69v13.655a3.414 3.414 0 0 0 3.414 3.414h13.655a3.414 3.414 0 0 0 3.414-3.414V5.69a3.414 3.414 0 0 0-3.414-3.414zM3.413 4.552h1.138V5.69a1.138 1.138 0 0 0 2.276 0V4.552h6.827V5.69a1.138 1.138 0 0 0 2.276 0V4.552h1.138a1.138 1.138 0 0 1 1.138 1.138v4.552H2.276V5.69a1.138 1.138 0 0 1 1.138-1.138zm13.655 15.931H3.414a1.138 1.138 0 0 1-1.138-1.138v-6.827h15.931v6.827a1.138 1.138 0 0 1-1.138 1.138z" fill="#fff"/><path d="M5.69 17.07a1.138 1.138 0 1 0 0-2.277 1.138 1.138 0 0 0 0 2.276zM14.793 14.793h-4.551a1.138 1.138 0 1 0 0 2.276h4.551a1.138 1.138 0 0 0 0-2.275z" fill="#fff"/></svg>
             </div>
-            <div class="containerMsg" data-chat="psychology"></div>
+            <div class="containerMsg" id="psychology" data-chat="psychology"></div>
         </div>
     </article>
 </div>
@@ -98,8 +95,10 @@ style
                 <form method="post">
                     <input type="text" placeholder="Задание">
                 </form>
+                <input type="text" class="inputCalendar" id="input-picker">
+                <svg width="21" height="23" fill="none" class="svgCalendar"><path d="M17.07 2.276H15.93V1.138a1.138 1.138 0 0 0-2.275 0v1.138H6.827V1.138a1.138 1.138 0 1 0-2.276 0v1.138H3.414A3.414 3.414 0 0 0 0 5.69v13.655a3.414 3.414 0 0 0 3.414 3.414h13.655a3.414 3.414 0 0 0 3.414-3.414V5.69a3.414 3.414 0 0 0-3.414-3.414zM3.413 4.552h1.138V5.69a1.138 1.138 0 0 0 2.276 0V4.552h6.827V5.69a1.138 1.138 0 0 0 2.276 0V4.552h1.138a1.138 1.138 0 0 1 1.138 1.138v4.552H2.276V5.69a1.138 1.138 0 0 1 1.138-1.138zm13.655 15.931H3.414a1.138 1.138 0 0 1-1.138-1.138v-6.827h15.931v6.827a1.138 1.138 0 0 1-1.138 1.138z" fill="#fff"/><path d="M5.69 17.07a1.138 1.138 0 1 0 0-2.277 1.138 1.138 0 0 0 0 2.276zM14.793 14.793h-4.551a1.138 1.138 0 1 0 0 2.276h4.551a1.138 1.138 0 0 0 0-2.275z" fill="#fff"/></svg>
             </div>
-            <div class="containerMsg" data-chat="organizationTheory"></div>
+            <div class="containerMsg" id="organizationTheory" data-chat="organizationTheory"></div>
         </div>
     </article>
 </div>
@@ -122,8 +121,10 @@ style
                 <form method="post">
                     <input type="text" placeholder="Задание">
                 </form>
+                <input type="text" class="inputCalendar" id="input-picker">
+                <svg width="21" height="23" fill="none" class="svgCalendar"><path d="M17.07 2.276H15.93V1.138a1.138 1.138 0 0 0-2.275 0v1.138H6.827V1.138a1.138 1.138 0 1 0-2.276 0v1.138H3.414A3.414 3.414 0 0 0 0 5.69v13.655a3.414 3.414 0 0 0 3.414 3.414h13.655a3.414 3.414 0 0 0 3.414-3.414V5.69a3.414 3.414 0 0 0-3.414-3.414zM3.413 4.552h1.138V5.69a1.138 1.138 0 0 0 2.276 0V4.552h6.827V5.69a1.138 1.138 0 0 0 2.276 0V4.552h1.138a1.138 1.138 0 0 1 1.138 1.138v4.552H2.276V5.69a1.138 1.138 0 0 1 1.138-1.138zm13.655 15.931H3.414a1.138 1.138 0 0 1-1.138-1.138v-6.827h15.931v6.827a1.138 1.138 0 0 1-1.138 1.138z" fill="#fff"/><path d="M5.69 17.07a1.138 1.138 0 1 0 0-2.277 1.138 1.138 0 0 0 0 2.276zM14.793 14.793h-4.551a1.138 1.138 0 1 0 0 2.276h4.551a1.138 1.138 0 0 0 0-2.275z" fill="#fff"/></svg>
             </div>
-            <div class="containerMsg" data-chat="businessStatistics"></div>
+            <div class="containerMsg" id="businessStatistics" data-chat="businessStatistics"></div>
         </div>
     </article>
 </div>
@@ -146,8 +147,10 @@ style
                 <form method="post">
                     <input type="text" placeholder="Задание">
                 </form>
+                <input type="text" class="inputCalendar" id="input-picker">
+                <svg width="21" height="23" fill="none" class="svgCalendar"><path d="M17.07 2.276H15.93V1.138a1.138 1.138 0 0 0-2.275 0v1.138H6.827V1.138a1.138 1.138 0 1 0-2.276 0v1.138H3.414A3.414 3.414 0 0 0 0 5.69v13.655a3.414 3.414 0 0 0 3.414 3.414h13.655a3.414 3.414 0 0 0 3.414-3.414V5.69a3.414 3.414 0 0 0-3.414-3.414zM3.413 4.552h1.138V5.69a1.138 1.138 0 0 0 2.276 0V4.552h6.827V5.69a1.138 1.138 0 0 0 2.276 0V4.552h1.138a1.138 1.138 0 0 1 1.138 1.138v4.552H2.276V5.69a1.138 1.138 0 0 1 1.138-1.138zm13.655 15.931H3.414a1.138 1.138 0 0 1-1.138-1.138v-6.827h15.931v6.827a1.138 1.138 0 0 1-1.138 1.138z" fill="#fff"/><path d="M5.69 17.07a1.138 1.138 0 1 0 0-2.277 1.138 1.138 0 0 0 0 2.276zM14.793 14.793h-4.551a1.138 1.138 0 1 0 0 2.276h4.551a1.138 1.138 0 0 0 0-2.275z" fill="#fff"/></svg>
             </div>
-            <div class="containerMsg" data-chat="crossCultural"></div>
+            <div class="containerMsg" id="crossCultural" data-chat="crossCultural"></div>
         </div>
     </article>
 </div>
@@ -157,7 +160,7 @@ style
         <div class="card-wrap">
             <div class="card-left">
                 <div class="cL-wrap">
-                    <span class="card-title">Управление челресурсами</span>
+                    <span class="card-title">Человеческие ресурсы</span>
                     <div class="cLw-msg">
                     </div>
                 </div>
@@ -170,8 +173,13 @@ style
                 <form method="post">
                     <input type="text" placeholder="Задание">
                 </form>
+                <input type="text" class="inputCalendar" id="input-picker">
+                <svg width="21" height="23" fill="none" class="svgCalendar"><path d="M17.07 2.276H15.93V1.138a1.138 1.138 0 0 0-2.275 0v1.138H6.827V1.138a1.138 1.138 0 1 0-2.276 0v1.138H3.414A3.414 3.414 0 0 0 0 5.69v13.655a3.414 3.414 0 0 0 3.414 3.414h13.655a3.414 3.414 0 0 0 3.414-3.414V5.69a3.414 3.414 0 0 0-3.414-3.414zM3.413 4.552h1.138V5.69a1.138 1.138 0 0 0 2.276 0V4.552h6.827V5.69a1.138 1.138 0 0 0 2.276 0V4.552h1.138a1.138 1.138 0 0 1 1.138 1.138v4.552H2.276V5.69a1.138 1.138 0 0 1 1.138-1.138zm13.655 15.931H3.414a1.138 1.138 0 0 1-1.138-1.138v-6.827h15.931v6.827a1.138 1.138 0 0 1-1.138 1.138z" fill="#fff"/><path d="M5.69 17.07a1.138 1.138 0 1 0 0-2.277 1.138 1.138 0 0 0 0 2.276zM14.793 14.793h-4.551a1.138 1.138 0 1 0 0 2.276h4.551a1.138 1.138 0 0 0 0-2.275z" fill="#fff"/></svg>
             </div>
-            <div class="containerMsg" data-chat="humanResources"></div>
+            <div class="containerMsg" id="humanResources" data-chat="humanResources"></div>
         </div>
     </article>
 </div>
+
+style
+    include ../style/conf-calendar.css

@@ -1,0 +1,25 @@
+.mbsc-popup-overlay {
+    background: none !important;
+}
+.mbsc-material.mbsc-popup-body {
+    box-shadow: none;
+}
+
+.mbsc-ltr > button:first-child {
+    display: none;
+}
+.mbsc-ltr > button:last-child {
+    margin-right: 5px !important;
+    width: 90px;
+    background: none;
+}
+.mbsc-ltr > button:last-child::before {
+    position: absolute;
+    content: "Выбрать";
+    padding: 8px 25px 8px;
+    background: white;
+}
+
+.mbsc-material .mbsc-popup-body {
+    box-shadow: none !important;
+}

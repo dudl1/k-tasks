@@ -3,18 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Tasks</title>
+    <meta name="author" content="Octane">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     style
         include style/style.css
 </head>
 <body>
-    <div id="public">
+    <div id="public" role="main">
         include includes/card.pug
     </div>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
     <script src="/socket.io/socket.io.js"></script>
     script
         include script/script.js
+    style
+        include style/calendar.css
+    script
+        include script/calendar.js
+    script
+        include script/conf-calendar.js
 </body>
 </html>

@@ -12,6 +12,7 @@ for (let i = 0; i < card.length; i++)
     const positionElem = parentElem.getBoundingClientRect().top + 10;
     parentElem.style.cssText = `top:${positionElem}px;`;
 
+
     elem.addEventListener("click", function(e)
     {
         window.history.pushState({}, "", window.location.pathname + link);
@@ -25,29 +26,34 @@ for (let i = 0; i < card.length; i++)
         parentElem.style.zIndex = `9999`;
         setTimeout(() => {public.style.overflow = `hidden`;}, 300);
         $('html, body').animate({scrollTop: $("body").offset().top}, 300);
-        
+
         input.setAttribute("name", link);
         input.setAttribute("autocomplete", "off");
+
+        let calendar = parentElem.children[1].children[1].children[2];
 
         let form = input.parentNode;
         form.addEventListener("submit", (e)=>
         {
             e.preventDefault();
             e.stopImmediatePropagation();
-    
+
             const inputData =
             {
                 "id": Date.now(),
                 "link": link,
-                "msg": input.value
+                "msg": input.value,
+                "typeCalendar": calendar.__mbscInst._oldValueText <= 4 ? 1 : 0,
+                "dateTo": calendar.__mbscInst._oldValueText
             };
 
             if (input.value)
             {
                 socket.emit("chat message", inputData);
                 input.value = "";
-            }
 
+                calendar.__mbscInst._oldValueText = " ";
+            }
         })
     })
 
@@ -58,7 +64,7 @@ for (let i = 0; i < card.length; i++)
         public.style = ``;
 
         let input = parentElem.children[1].children[1].children[1].children[0];
-        input.style.background = `white`;
+        input.style.background = 'white';
         input.value = "";
 
         input.removeAttribute("name", link);
@@ -67,5 +73,59 @@ for (let i = 0; i < card.length; i++)
 
 socket.on("message", function(msg)
 {
-    console.log(msg);
+    const svgCalendar = `<svg width="16" height="18" fill="none"><path d="M13.32 1.776h-.889V.888a.888.888 0 0 0-1.775 0v.888H5.327V.888a.888.888 0 1 0-1.776 0v.888h-.888A2.664 2.664 0 0 0 0 4.44v10.655a2.664 2.664 0 0 0 2.664 2.664h10.655a2.664 2.664 0 0 0 2.664-2.664V4.44a2.664 2.664 0 0 0-2.664-2.664zM2.663 3.552h.888v.888a.888.888 0 1 0 1.776 0v-.888h5.327v.888a.888.888 0 1 0 1.776 0v-.888h.888a.888.888 0 0 1 .888.888v3.552H1.776V4.44a.888.888 0 0 1 .888-.888zm10.655 12.431H2.664a.888.888 0 0 1-.888-.888V9.768h12.431v5.327a.888.888 0 0 1-.888.888z" fill="#333"/><path d="M4.44 13.32a.888.888 0 1 0 0-1.777.888.888 0 0 0 0 1.776zM11.543 11.543H7.992a.888.888 0 1 0 0 1.776h3.551a.888.888 0 0 0 0-1.776z" fill="#333"/></svg>`;
+
+    for (let i = 0; i < card.length; i++)
+    {
+        const elem = card[i];
+        let count = 0;
+        elem.addEventListener("click", function _self()
+        {
+            let path = window.location.pathname.replace(/[^a-zа-яё]/gi, '');
+            const msgJSON = msg[`${path}`];
+
+            let containerMsg = elem.parentNode.childNodes[1].childNodes[2];
+
+            Object.values(msgJSON).map(item =>
+                containerMsg.insertAdjacentHTML("afterbegin", `
+                <div>${item.msg}
+                    <div class="lineMsg" style="${item.typeCalendar == 1 ? "display:none;" : ""}"></div>
+                    <div class="dateToMsg" style="${
+                            item.typeCalendar == 1 ? "display:none;" : ""
+                        }">
+                        ${svgCalendar}
+                        <span style="margin-left:8px;">${item.dateTo}</span>
+                    </div>
+                </div>
+                `)
+            );
+
+            if (++count == 1) elem.removeEventListener("click", _self);
+        })
+    }
+
+    if (msg.link == undefined)
+    {
+        return false;
+    } else {
+        if (msg.typeCalendar == 1)
+        {
+            document.getElementById(`${msg.link}`)
+            .insertAdjacentHTML("afterbegin", `<div>${msg.msg}</div>`);
+        }
+
+        if (msg.typeCalendar == 0)
+        {
+            document.getElementById(`${msg.link}`)
+            .insertAdjacentHTML("afterbegin", `
+            <div>${msg.msg}
+                <div class="lineMsg"></div>
+                <div class="dateToMsg">
+                    ${svgCalendar}
+                    <span style="margin-left:8px;">${msg.dateTo}</span>
+                </div>
+            </div>
+            `);
+        }
+    }
 })

@@ -42,7 +42,7 @@
     margin-left: 17PX;
     width: 100%;
     font-size: 22px;
-    font-weight: 600;
+    font-weight: 580;
     color: #333;
     /*word-break: break-all;*/
 }
@@ -95,6 +95,22 @@
     color: #ffffff;
 }
 
+.inputCalendar {
+    position: absolute;
+    margin: -58px calc(100% - 63px) !important;
+    width: 1px !important;
+    background: none !important;
+    z-index: -99;
+}
+
+.svgCalendar {
+    pointer-events: none;
+    position: absolute!important;
+    margin: -47px calc(100% - 55px) !important;
+    opacity: 0!important;
+    background: 0 0!important;
+}
+
 .containerMsg {
     display: flex;
     flex-direction: column-reverse;
@@ -107,6 +123,7 @@
     opacity: 0;
     overflow-y: scroll;
     transition: .2s ease-in-out;
+    z-index: -9999 !important;
 }
 
 .containerMsg > div {
@@ -171,7 +188,16 @@
 
 .card.active .containerMsg {
     align-items: flex-start;
+    width: 100%;
     opacity: 1;
-    z-index: 0;
+    z-index: 0 !important;
     transition-delay: .5s;
+}
+
+.card.active .svgCalendar {
+    opacity: 1 !important;
+}
+
+.card.active .inputCalendar {
+    z-index: 99;
 }
