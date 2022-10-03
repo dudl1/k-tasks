@@ -1,26 +1,17 @@
-const express = require("express");
+const express = require("express"),
+      io = new Server(server),
+      fs = require("fs");
+
 const app = express();
-const http = require("http");
-const server = http.createServer(app);
-const { Server } = require("socket.io");
-const io = new Server(server);
-const fs = require("fs");
-const { v4: uuid4 } = require("uuid");
-
-
 const PORT = process.env.PORT || 80;
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/views/index.html');
 });
 
-
-const users = {};
-io.on("connection", (socket)=>
+//const users = {};
+/*io.on("connection", (socket)=>
 {
-    const id = uuid4();
-    users[id] = io;
-
     fs.readFile("db.json", function(error, data)
     {
         const dataJSON = data.toString();
@@ -48,9 +39,8 @@ io.on("connection", (socket)=>
 
     socket.on("close", ()=>
     {
-        delete users[id];
     })
-})
+})*/
 
 
-server.listen(PORT, () => { console.log("Start");});
+app.listen(PORT,()=>{console.log("Started");});
