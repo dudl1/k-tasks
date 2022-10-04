@@ -23,6 +23,7 @@
 [data-card="managementTechnologies"] {background: #2ECC71;}
 [data-card="psychology"] {background: #5499C7;}
 [data-card="organizationTheory"] {background: #EC7063;}
+[data-card="contractSystems"] {background: #f6aeb5;}
 [data-card="businessStatistics"] {background: #AF7AC5;}
 [data-card="crossCultural"] {background: #E59866;}
 [data-card="humanResources"] {background: #B0BEC5;}
@@ -124,6 +125,7 @@
     overflow-y: scroll;
     transition: .2s ease-in-out;
     z-index: -9999 !important;
+    cursor: default;
 }
 
 .containerMsg > div {
@@ -136,6 +138,8 @@
     color: #333333;
     fill: #333333;
     background: #fff;
+    cursor: pointer;
+    user-select: text;
 }
 
 .lineMsg {
@@ -145,7 +149,7 @@
     background: #dfdfdf;
 }
 
-.dateToMsg {display: flex;margin-top:7px;}
+.dateToMsg {display: flex;margin-top:7px;user-select: none;}
 .dateToMsg > svg {fill: #333333;opacity:1!important;;}
 
 .card.active {
@@ -157,11 +161,11 @@
 }
 
 .card.active .card-mask {
-    animation: noas forwards;
+    animation: mask forwards;
     animation-duration: .9s;
     animation-delay: 0;
 }
-@keyframes noas {
+@keyframes mask {
     100% {
         align-items: flex-start;
     }
