@@ -5,7 +5,7 @@ const card = document.querySelectorAll(".card-wrap");
 
 const HTMLMsgDialog = document.createElement("msg-dialog");
 
-function msgDialog()
+/*function msgDialog()
 {
     setTimeout(() => {
         const msgDiv = document.querySelectorAll(".containerMsg>div");
@@ -38,7 +38,7 @@ function msgDialog()
             }
         }
     }, 500);
-}
+}*/
 
 for (let i = 0; i < card.length; i++)
 {
@@ -54,6 +54,20 @@ for (let i = 0; i < card.length; i++)
     {
         window.history.pushState({}, "", window.location.pathname + link);
         e.preventDefault();
+
+        setTimeout(() => {
+            let msgDivStyle = parentElem.childNodes[1].childNodes[2].children;
+            for (let i = 0; i < msgDivStyle.length; i++) {
+                const msgSize = msgDivStyle[i];
+                const windowSize = window.innerWidth;
+                const msgNormalWindow = window.innerWidth - 50;
+
+                if (msgSize.offsetWidth + 70 >= windowSize)
+                {
+                    msgSize.style.width = `${msgSize.offsetWidth - 70}px`;
+                }
+            }
+        }, 450);
 
         let colorInput = parentElem.childNodes[1].childNodes[0].childNodes[0].getAttribute("fill");
         let input = parentElem.children[1].children[1].children[1].children[0];
@@ -174,5 +188,5 @@ socket.on("message", function(msg)
         }
     }
 
-    msgDialog();
+    //msgDialog();
 })

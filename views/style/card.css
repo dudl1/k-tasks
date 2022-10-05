@@ -118,7 +118,6 @@
     position: absolute;
     margin-top: 10px;
     height: calc(100% - 70px);
-    padding-right: 40px;
     background: #fffefe00;
     z-index: -99;
     opacity: 0;
@@ -132,11 +131,12 @@
     margin-left: 20px;
     margin-bottom: 13px;
     max-width: 350px;
+    margin-right: 50px;
     padding: 9px;
     border-radius: 10px;
     word-wrap: break-word;
-    color: #333333;
-    fill: #333333;
+    color: #333;
+    fill: #333;
     background: #fff;
     cursor: pointer;
     user-select: text;
@@ -192,7 +192,7 @@
 
 .card.active .containerMsg {
     align-items: flex-start;
-    width: 100%;
+    /*width: 100%;*/
     opacity: 1;
     z-index: 0 !important;
     transition-delay: .5s;

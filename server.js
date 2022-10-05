@@ -46,11 +46,32 @@ io.on("connection", (socket)=>
 
     });
 
-    socket.on("close", ()=>
+    /*socket.on("delete", (id)=>
+    {
+        io.emit("message", id.id);
+
+        fs.readFile("db.json", function(error, data)
+        {
+            let json = data.toString();
+            json = JSON.parse(json);
+
+            let pathLink = id["link"];
+            let pathId = id["id"];
+            let pathToDelete = json[`${pathLink}`];
+
+            for (let i = 0; i < pathToDelete.length; i++) {
+                pathToDelete.splice(i, 1);
+            }
+
+            const strJSON = JSON.stringify(json);
+            fs.writeFile('db.json', strJSON, function(err){})
+        })
+    });*/
+
+    /*socket.on("close", ()=>
     {
         delete users[id];
-    })
+    })*/
 })
-
 
 server.listen(PORT, () => { console.log("Start");});
