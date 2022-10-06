@@ -5,7 +5,7 @@ const card = document.querySelectorAll(".card-wrap");
 
 const HTMLMsgDialog = document.createElement("msg-dialog");
 
-/*function msgDialog()
+function msgDialog()
 {
     setTimeout(() => {
         const msgDiv = document.querySelectorAll(".containerMsg>div");
@@ -38,7 +38,7 @@ const HTMLMsgDialog = document.createElement("msg-dialog");
             }
         }
     }, 500);
-}*/
+}
 
 for (let i = 0; i < card.length; i++)
 {
@@ -188,5 +188,5 @@ socket.on("message", function(msg)
         }
     }
 
-    //msgDialog();
+    msgDialog();
 })

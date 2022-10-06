@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
@@ -15,8 +16,11 @@
     "jsdom": "^20.0.0",
     "jsontoxml": "^1.0.1",
     "lowdb": "^3.0.0",
+    "mongodb": "^4.10.0",
+    "mysql": "^2.18.1",
     "node-html-parser": "^6.0.0",
     "node-json-db": "^2.1.2",
+    "nodemon": "^2.0.20",
     "nscdb": "^0.1.7",
     "panda-db": "^0.1.6",
     "request-promise": "^4.2.6",

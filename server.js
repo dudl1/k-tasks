@@ -5,15 +5,24 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
 const fs = require("fs");
+const mysql = require("mysql");
 const { v4: uuid4 } = require("uuid");
 
-
-const PORT = process.env.PORT || 80;
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/views/index.html');
 });
 
+const db = mysql.createConnection({
+    host: "sql11.freesqldatabase.com",
+    user: "sql11524632",
+    password: "7H9l6UakR4"
+})
+
+db.connect(err=>
+{
+    err ? console.log("NOT") : console.log("OK");
+})
 
 const users = {};
 io.on("connection", (socket)=>
@@ -21,17 +30,16 @@ io.on("connection", (socket)=>
     const id = uuid4();
     users[id] = io;
 
-    fs.readFile("db.json", function(error, data)
+    /*fs.readFile("db.json", function(error, data)
     {
         const dataJSON = data.toString();
         socket.send(JSON.parse(dataJSON));
-    })
-
+    })*/
     socket.on("chat message", (msg)=>
     {
         io.emit("message", msg);
 
-        fs.readFile("db.json", function(error, data)
+        /*fs.readFile("db.json", function(error, data)
         {
             let json = data.toString();
             let link = msg.link;
@@ -42,15 +50,14 @@ io.on("connection", (socket)=>
             const strJSON = JSON.stringify(json);
 
             fs.writeFile('db.json', strJSON, function(err){})
-        })
-
+        })*/
     });
 
-    /*socket.on("delete", (id)=>
+    socket.on("delete", (id)=>
     {
         io.emit("message", id.id);
 
-        fs.readFile("db.json", function(error, data)
+        /*fs.readFile("db.json", function(error, data)
         {
             let json = data.toString();
             json = JSON.parse(json);
@@ -65,13 +72,14 @@ io.on("connection", (socket)=>
 
             const strJSON = JSON.stringify(json);
             fs.writeFile('db.json', strJSON, function(err){})
-        })
-    });*/
+        })*/
+    });
 
-    /*socket.on("close", ()=>
+    socket.on("disconnect", ()=>
     {
         delete users[id];
-    })*/
+    })
+    
 })
 
-server.listen(PORT, () => { console.log("Start");});
+server.listen(process.env.PORT || 80, () => { console.log("Start");});
