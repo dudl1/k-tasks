@@ -13,22 +13,23 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/views/index.html');
 });
 
-const db = mysql.createConnection({
-    host: "sql11.freesqldatabase.com",
-    user: "sql11524632",
-    password: "7H9l6UakR4"
-})
-
-db.connect(err=>
-{
-    err ? console.log("NOT") : console.log("OK");
-})
-
 const users = {};
 io.on("connection", (socket)=>
 {
     const id = uuid4();
     users[id] = io;
+    console.log("Зашел");
+    
+    const db = mysql.createConnection({
+    host: "sql11.freesqldatabase.com",
+    user: "sql11524632",
+    password: "7H9l6UakR4"
+    })
+
+    db.connect(err=>
+    {
+        err ? console.log("NOT") : console.log("OK");
+    })
 
     /*fs.readFile("db.json", function(error, data)
     {
@@ -78,6 +79,7 @@ io.on("connection", (socket)=>
     socket.on("disconnect", ()=>
     {
         delete users[id];
+        console.log("Вышел");
     })
     
 })
