@@ -91,7 +91,6 @@ for (let i = 0; i < card.length; i++)
 
             const inputData =
             {
-                "id": Date.now(),
                 "link": link,
                 "msg": input.value,
                 "typeCalendar": calendar.__mbscInst._oldValueText <= 4 ? 1 : 0,
