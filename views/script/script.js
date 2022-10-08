@@ -50,7 +50,7 @@ for (let i = 0; i < card.length; i++)
     parentElem.style.cssText = `top:${positionElem}px;`;
 
 
-    elem.addEventListener("click", function(e)
+    parentElem.addEventListener("click", function(e)
     {
         window.history.pushState({}, "", window.location.pathname + link);
         e.preventDefault();
@@ -69,9 +69,7 @@ for (let i = 0; i < card.length; i++)
             }
         }, 450);
 
-        let colorInput = parentElem.childNodes[1].childNodes[0].childNodes[0].getAttribute("fill");
         let input = parentElem.children[1].children[1].children[1].children[0];
-        input.style.background = colorInput;
 
         parentElem.classList.add("active");
         parentElem.style.zIndex = `9999`;
@@ -116,10 +114,7 @@ for (let i = 0; i < card.length; i++)
         public.style = ``;
 
         let input = parentElem.children[1].children[1].children[1].children[0];
-        input.style.background = 'white';
         input.value = "";
-
-        input.removeAttribute("name", link);
     })
 }
 
