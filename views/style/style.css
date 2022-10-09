@@ -19,6 +19,10 @@ html, body {
     height: 100%;
 }
 
+#trial-message {
+    display: none;
+}
+
 ::-webkit-scrollbar {
     display: none;
 }

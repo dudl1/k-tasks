@@ -1,0 +1,50 @@
+/* OPEN: Menu chat */
+
+.card-mask.activeInputMenu {
+    margin-top: -60px;
+}
+
+.menuChat.activeInputMenu {transform: translateY(-28px);}
+
+input.activeInputMenu {
+    height: 70px;
+    transition: .2s ease-in-out;
+}
+
+select-menu {
+    position: absolute;
+    margin-top: -100px;
+    background: #ffffff;
+    transition: .2s ease-in-out;
+}
+
+select-menu > div {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.groupCalendar {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
+
+.groupCalendar > svg {
+    position: relative;
+    opacity: 1 !important;
+}
+
+.groupCalendar > span {
+    margin-top: -10px;
+}
+
+.sM-input {
+    margin-top: -55px !important;
+    opacity: 0;
+}
+
+.menuChat {
+    display: block;
+}
+
+/* CLOSE: Menu chat */

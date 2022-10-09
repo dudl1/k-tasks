@@ -4,6 +4,7 @@ const public = document.getElementById("public");
 const card = document.querySelectorAll(".card-wrap");
 
 const HTMLMsgDialog = document.createElement("msg-dialog");
+const funcElem = document.querySelector("func-elem");
 
 function msgDialog()
 {
@@ -69,9 +70,7 @@ for (let i = 0; i < card.length; i++)
             }
         }, 450);
 
-        let colorInput = parentElem.childNodes[1].childNodes[0].childNodes[0].getAttribute("fill");
         let input = parentElem.children[1].children[1].children[1].children[0];
-        input.style.background = colorInput;
 
         parentElem.classList.add("active");
         parentElem.style.zIndex = `9999`;
@@ -81,7 +80,7 @@ for (let i = 0; i < card.length; i++)
         input.setAttribute("name", link);
         input.setAttribute("autocomplete", "off");
 
-        let calendar = parentElem.children[1].children[1].children[2];
+        let calendar = parentElem.children[1].children[1].children[3];
 
         let form = input.parentNode;
         form.addEventListener("submit", (e)=>
@@ -93,8 +92,8 @@ for (let i = 0; i < card.length; i++)
             {
                 "link": link,
                 "msg": input.value,
-                "typeCalendar": calendar.__mbscInst._oldValueText <= 4 ? 1 : 0,
-                "dateTo": calendar.__mbscInst._oldValueText
+                "typeCalendar": calendar.innerText <= 4 ? 1 : 0,
+                "dateTo": calendar.innerText
             };
 
             if (input.value)
@@ -102,7 +101,7 @@ for (let i = 0; i < card.length; i++)
                 socket.emit("chat message", inputData);
                 input.value = "";
 
-                calendar.__mbscInst._oldValueText = " ";
+                calendar.innerText = " ";
             }
         })
 
@@ -116,10 +115,22 @@ for (let i = 0; i < card.length; i++)
         public.style = ``;
 
         let input = parentElem.children[1].children[1].children[1].children[0];
-        input.style.background = 'white';
         input.value = "";
+        let calendar = parentElem.children[1].children[1].children[3];
+        calendar.innerText = " ";
 
         input.removeAttribute("name", link);
+
+        const selectMenu = document.querySelector("[data-func=selectMenu]");
+        funcElem.append(selectMenu);
+
+        parentElem.childNodes[1].classList.remove("activeInputMenu");
+        parentElem.childNodes[1].childNodes[1].childNodes[1].childNodes[0].classList.remove("activeInputMenu");
+        parentElem.childNodes[1].childNodes[1].childNodes[2].classList.remove("activeInputMenu");
+        const selectMenuIf = parentElem.childNodes[1].childNodes[1].childNodes[4];
+        selectMenuIf
+            ? setTimeout(() => {selectMenuIf.remove();}, 500)
+            : false
     })
 }
 

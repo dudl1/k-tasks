@@ -2,7 +2,11 @@
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
-    height: 185px;
+    height: 98px;
+}
+
+p {
+    display: none;
 }
 
 .card {
@@ -12,21 +16,23 @@
     position: absolute;
     max-width: 505px;
     width: calc(100% - 20px);
-    height: 185px;
+    height: 100px;
+    border-bottom-right-radius: 0!important;
+    border-bottom-left-radius: 0!important;
     border-radius: 17px;
     overflow: hidden;
     cursor: pointer;
     transition: .3s ease-in-out;
 }
 
-[data-card="economy"] {background: #ffc528;}
+[data-card="economy"] {background: #FECD48;}
 [data-card="managementTechnologies"] {background: #2ECC71;}
-[data-card="psychology"] {background: #5499C7;}
-[data-card="organizationTheory"] {background: #EC7063;}
-[data-card="contractSystems"] {background: #f6aeb5;}
-[data-card="businessStatistics"] {background: #AF7AC5;}
-[data-card="crossCultural"] {background: #E59866;}
-[data-card="humanResources"] {background: #B0BEC5;}
+[data-card="psychology"] {background: #70B3E0;}
+[data-card="organizationTheory"] {background: #FA8175;}
+[data-card="contractSystems"] {background: #E4BEC2;}
+[data-card="businessStatistics"] {background: #B081FE;}
+[data-card="crossCultural"] {background: #E3A177;}
+[data-card="humanResources"] {background: #aabdc7; border-radius: 17px !important;}
 
 .card-left,.cL-wrap {
     height: 100%;
@@ -42,14 +48,14 @@
     margin-top: 17px;
     margin-left: 17PX;
     width: 100%;
-    font-size: 22px;
+    font-size: 19.5px;
     font-weight: 580;
-    color: #333;
+    color: #000000;
     /*word-break: break-all;*/
 }
 .card-title,
 .card-mask svg {
-    transition: .3s ease-in-out;
+    transition: .1s ease-in-out;
 }
 
 .card-mask {
@@ -58,6 +64,7 @@
     flex-direction: column;
     align-items: flex-end;
     height: 100%;
+    transition: .2s ease-in-out;
 }
 
 .cM-wrap {
@@ -66,6 +73,7 @@
     height: 50px;
     background: #ffffff;
     border-radius: 50px;
+    opacity: 0;
     transition: .3s ease-in-out;
 }
 .cM-wrap svg {
@@ -85,7 +93,7 @@
     padding: 20px;
     outline: none;
     font-size: 17px;
-    color: white;
+    color: #111111;
     background: #ffffff;
     font-weight: 400;
     font-family: 'Inter', sans-serif;
@@ -93,7 +101,7 @@
 }
 
 .cM-wrap input::placeholder {
-    color: #ffffff;
+    color: #111111;
 }
 
 .inputCalendar {
@@ -102,6 +110,15 @@
     width: 1px !important;
     background: none !important;
     z-index: -99;
+    cursor: pointer;
+}
+
+.menuChat {
+    pointer-events: none;
+    position: absolute!important;
+    margin: -47px calc(100% - 55px) !important;
+    opacity: 0;
+    transition: .2s ease-in-out;
 }
 
 .svgCalendar {
@@ -157,7 +174,8 @@
     top: 0 !important;
     width: 100%;
     height: 100%;
-    border-radius: 0;
+    border-radius: 0 !important;
+    cursor: default;
 }
 
 .card.active .card-mask {
@@ -173,9 +191,16 @@
 .card.active .card-mask svg {opacity: 0;}
 .card.active .card-title {opacity: 0;}
 
+.card.active .menuChat {
+    pointer-events: all;
+    opacity: 1 !important;
+    cursor: pointer;
+}
+
 .card.active .cM-wrap {
     margin: 0px;
     width: 100%;
+    opacity: 1;
 }
 
 .card.active .cM-wrap input {
@@ -183,7 +208,7 @@
     margin-top: -8px;
     width: calc(100% - 48px);
     padding: 24px;
-    border-radius: 0px;
+    border-radius: 0;
 }
 
 .card.active .cM-wrap {
@@ -192,7 +217,6 @@
 
 .card.active .containerMsg {
     align-items: flex-start;
-    /*width: 100%;*/
     opacity: 1;
     z-index: 0 !important;
     transition-delay: .5s;
@@ -200,8 +224,4 @@
 
 .card.active .svgCalendar {
     opacity: 1 !important;
-}
-
-.card.active .inputCalendar {
-    z-index: 99;
 }
