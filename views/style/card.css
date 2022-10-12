@@ -149,14 +149,13 @@ p {
     margin-bottom: 13px;
     max-width: 350px;
     margin-right: 50px;
-    padding: 9px;
-    border-radius: 10px;
+    padding: 6px;
+    border-radius: 7px;
     word-wrap: break-word;
     color: #333;
     fill: #333;
     background: #fff;
     cursor: pointer;
-    user-select: text;
 }
 
 .lineMsg {
@@ -190,6 +189,18 @@ p {
 }
 .card.active .card-mask svg {opacity: 0;}
 .card.active .card-title {opacity: 0;}
+
+.photoChat {
+    margin-bottom: 10px;
+    max-width: 100%;
+    width: 350px;
+    max-height: 350px;
+    border-radius: 6px;
+}
+
+.baseimg {
+    content-visibility: hidden;
+}
 
 .card.active .menuChat {
     pointer-events: all;

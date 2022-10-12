@@ -8,15 +8,25 @@ html, body {
     height: 100%;
     padding: 0;
     font-family: 'Inter', sans-serif;
-    user-select: none;
+    -moz-user-select: none; -webkit-user-select: none; -ms-user-select: none; user-select: none;
     overflow: hidden;
     overflow-y: scroll;
 }
 
+body {
+    display: grid;
+    justify-items: center;
+    content-visibility: hidden;
+}
+
 #public {
-    position: relative;
-    margin: 0 auto;
+    /*position: relative;*/
+    margin: 10px auto;
     height: 100%;
+    transition: .1s ease-in-out;
+}
+#public.active {
+    margin: 0 auto;
 }
 
 #trial-message {

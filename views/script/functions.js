@@ -35,6 +35,8 @@ for (let i = 0; i < menuChat.length; i++)
         crSelectMenu.insertAdjacentElement("afterbegin", selectMenu);
         elem.parentNode.append(crSelectMenu);
 
+        const calendarBtn =  document.querySelector(".calendarBtn");
+
         document.querySelectorAll(".groupCalendar").forEach(e=>
         {
             e.onclick = ()=>
@@ -43,14 +45,70 @@ for (let i = 0; i < menuChat.length; i++)
                 cardMask.classList.remove("activeInputMenu"),
                 inputActive.classList.remove("activeInputMenu");
                 funcElem.append(selectMenu);
-
-                document.querySelector(".mbsc-popup-button-primary").onclick = ()=>
-                {
-                    const inputDateNum = document.querySelector("#input-picker");
-                    inputCurrentDate.innerHTML = inputDateNum.__mbscInst._oldValueText;
-                }
-
             }
         })
+
+        calendarBtn.onclick = ()=>
+        {
+            svgMenuChat.classList.remove("activeInputMenu"),
+            cardMask.classList.remove("activeInputMenu"),
+            inputActive.classList.remove("activeInputMenu");
+            funcElem.append(selectMenu);
+
+            document.querySelector(".calendar").classList.add("active");
+
+            setInterval(() => {
+                let dayC = document.querySelectorAll(".calendar-day-hover");
+                for (let we = 0; we < dayC.length; we++)
+                {
+                    const elem = dayC[we];
+                    elem.onclick = (e)=>
+                    {
+                        let mounthC = document.querySelector(".month-picker").innerText;
+                        let yearC = document.querySelector("#year").innerText;
+                        inputCurrentDate.innerHTML = `${e.target.innerText} ${mounthC} ${yearC}`;
+                        document.querySelector(".calendar").classList.remove("active");
+                    }
+                }
+            }, 1000);
+        }
+
     })
 }
+
+async function handleImageUpload(event)
+{
+    const imageFile = event.target.files[0];
+    //console.log(`Оригинальный размер ${imageFile.size / 1024 / 1024} MB`);
+
+    const options =
+    {
+        maxSizeMB: 1,
+        maxWidthOrHeight: 1024,
+        useWebWorker: true
+    }
+
+    try
+    {
+        const compressedFile = await imageCompression(imageFile, options);
+        //console.log(`Сжатое фото ${compressedFile.size / 1024 / 1024} MB`);
+        var reader = new FileReader();
+        reader.readAsDataURL(compressedFile); 
+        reader.onloadend = function()
+        {
+            document.querySelector(".baseimg").innerHTML = reader.result;
+        }
+    } catch (error) {
+        return false;
+    }
+}
+
+/*document.querySelector(".sM-input").addEventListener("change", function()
+{
+    var file = this.files[0];
+    var reader = new FileReader();
+    reader.onloadend = function() {
+        document.querySelector(".baseimg").innerHTML = reader.result;
+    }
+    reader.readAsDataURL(file);
+})*/

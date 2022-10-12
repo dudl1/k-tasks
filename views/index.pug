@@ -6,27 +6,55 @@
     <meta name="author" content="Octane">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    script.
+        addEventListener("DOMContentLoaded", function() {
+            document.body.style.contentVisibility = "auto";
+        })
     style
         include style/style.css
 </head>
 <body>
+    <div class="calendar">
+        <div class="calendar-header">
+            <span class="month-picker styleHover" id="month-picker">Октябрь</span>
+            <div class="year-picker" id="prev-year">
+                <span class="year-change" id="prev-year"><img src="https://cdn-icons-png.flaticon.com/512/130/130882.png"></span>
+                <span id="year">2022</span>
+                <span class="year-change" id="will-year"><img src="https://cdn-icons-png.flaticon.com/512/130/130882.png" style="transform: rotateZ(180deg)"></span>
+            </div>
+        </div>
+        <div class="calendar-body">
+            <div class="calendar-week-day">
+                <div>Пн</div>
+                <div>Вт</div>
+                <div>Ср</div>
+                <div>Чт</div> 
+                <div>Пт</div>
+                <div>Сб</div>
+                <div>Вс</div>
+            </div>
+            <div class="calendar-days"></div>
+        </div>
+        <div class="month-list"></div>
+    </div>
     <div id="public" role="main">
         include includes/card.pug
     </div>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.0/dist/browser-image-compression.js"></script>
+    script
+        include script/calendar.js
     script
         include script/script.js
     style
         include style/calendar.css
-    <script src="https://cdn.jsdelivr.net/gh/dudl1/cdn-tasks@main/fast-calendar.js"></script>
     script
         include script/functions.js
-    script
-        include script/conf-calendar.js
     script
         include script/pwa.js
     style
         include style/msg-dialog.css
+    <div class="baseimg"></div>
 </body>
 </html>

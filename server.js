@@ -63,10 +63,12 @@ io.on("connection", (socket)=>
             let { data, error } = await supabase
                 .from("main")
                 .insert([{
+                    id: msg.id,
                     link: msg.link,
                     msg: msg.msg,
                     typeCalendar: msg.typeCalendar,
-                    dateTo: msg.dateTo
+                    dateTo: msg.dateTo,
+                    file: msg.file
                 }]);
         }
         addData();

@@ -8,7 +8,8 @@ const funcElem = document.querySelector("func-elem");
 
 function msgDialog()
 {
-    setTimeout(() => {
+    setTimeout(() =>
+    {
         const msgDiv = document.querySelectorAll(".containerMsg>div");
         for (let sas = 0; sas < msgDiv.length; sas++) {
             const msgClick = msgDiv[sas];
@@ -47,34 +48,18 @@ for (let i = 0; i < card.length; i++)
     let parentElem = elem.parentNode;
     let link = parentElem.attributes[1].nodeValue;
 
-    const positionElem = parentElem.getBoundingClientRect().top + 10;
-    parentElem.style.cssText = `top:${positionElem}px;`;
-
-
     elem.addEventListener("click", function(e)
     {
         window.history.pushState({}, "", window.location.pathname + link);
         e.preventDefault();
 
-        setTimeout(() => {
-            let msgDivStyle = parentElem.childNodes[1].childNodes[2].children;
-            for (let i = 0; i < msgDivStyle.length; i++) {
-                const msgSize = msgDivStyle[i];
-                const windowSize = window.innerWidth;
-                const msgNormalWindow = window.innerWidth - 50;
-
-                if (msgSize.offsetWidth + 70 >= windowSize)
-                {
-                    msgSize.style.width = `${msgSize.offsetWidth - 70}px`;
-                }
-            }
-        }, 450);
+        public.classList.add("active");
 
         let input = parentElem.children[1].children[1].children[1].children[0];
 
         parentElem.classList.add("active");
         parentElem.style.zIndex = `9999`;
-        setTimeout(() => {public.style.overflow = `hidden`;}, 300);
+        setTimeout(() => {document.body.style.overflowY = `hidden`;}, 300);
         $('html, body').animate({scrollTop: $("body").offset().top}, 300);
 
         input.setAttribute("name", link);
@@ -90,19 +75,22 @@ for (let i = 0; i < card.length; i++)
 
             const inputData =
             {
+                "id": Date.now(),
                 "link": link,
                 "msg": input.value,
                 "typeCalendar": calendar.innerText <= 4 ? 1 : 0,
-                "dateTo": calendar.innerText
+                "dateTo": calendar.innerText,
+                "file": document.querySelector(".baseimg").innerHTML
             };
 
             if (input.value)
             {
                 socket.emit("chat message", inputData);
                 input.value = "";
-
                 calendar.innerText = " ";
             }
+            document.querySelector(".baseimg").innerHTML = '';
+
         })
 
         msgDialog();
@@ -110,9 +98,10 @@ for (let i = 0; i < card.length; i++)
 
     addEventListener("popstate", ()=>
     {
+        public.classList.remove("active");
         parentElem.classList.remove("active");
         setTimeout(() => {parentElem.style.zIndex = `0`;}, 300);
-        public.style = ``;
+        document.body.style.overflowY = `scroll`
 
         let input = parentElem.children[1].children[1].children[1].children[0];
         input.value = "";
@@ -131,6 +120,9 @@ for (let i = 0; i < card.length; i++)
         selectMenuIf
             ? setTimeout(() => {selectMenuIf.remove();}, 500)
             : false
+
+        document.querySelector(".calendar").classList.remove("active");
+        document.querySelector(".baseimg").innerHTML = '';
     })
 }
 
@@ -157,7 +149,9 @@ socket.on("message", function(msg)
 
             Object.values(msgJSON).map(item =>
                 containerMsg.insertAdjacentHTML("afterbegin", `
-                <div n-msg="${item.id}">${item.msg}
+                <div n-msg="${item.id}">
+                    <img src="${item.file}" class="photoChat" draggable="false" />
+                    ${item.msg}
                     <div class="lineMsg" style="${item.typeCalendar == 1 ? "display:none;" : ""}"></div>
                     <div class="dateToMsg" style="${
                             item.typeCalendar == 1 ? "display:none;" : ""
@@ -180,14 +174,20 @@ socket.on("message", function(msg)
         if (msg.typeCalendar == 1)
         {
             document.getElementById(`${msg.link}`)
-            .insertAdjacentHTML("afterbegin", `<div n-msg="${msg.id}">${msg.msg}</div>`);
+            .insertAdjacentHTML("afterbegin", `
+            <div n-msg="${msg.id}">
+            <img src="${msg.file}" class="photoChat" style="${msg.file ? "display:block" : "display:none"}" draggable="false" />
+            ${msg.msg}
+            </div>`);
         }
 
         if (msg.typeCalendar == 0)
         {
             document.getElementById(`${msg.link}`)
             .insertAdjacentHTML("afterbegin", `
-            <div n-msg="${msg.id}">${msg.msg}
+            <div n-msg="${msg.id}">
+                <img src="${msg.file}" class="photoChat" style="${msg.file ? "display:block" : "display:none"}" draggable="false" />
+                ${msg.msg}
                 <div class="lineMsg"></div>
                 <div class="dateToMsg">
                     ${svgCalendar}
@@ -196,6 +196,7 @@ socket.on("message", function(msg)
             </div>
             `);
         }
+
     }
 
     msgDialog();
