@@ -6,10 +6,8 @@
     <meta name="author" content="Octane">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    script.
-        addEventListener("DOMContentLoaded", function() {
-            document.body.style.contentVisibility = "auto";
-        })
+    script
+        include script/head.js
     style
         include style/style.css
 </head>
@@ -37,11 +35,18 @@
         </div>
         <div class="month-list"></div>
     </div>
+    <header>
+        style
+            include style/header.css
+        <div>Предметы
+            <img class="photoCurrent" src="./default.avif" draggable="false">
+        </div>
+    </header>
     <div id="public" role="main">
         include includes/card.pug
     </div>
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.0/dist/browser-image-compression.js"></script>
     script
         include script/calendar.js
@@ -56,5 +61,12 @@
     style
         include style/msg-dialog.css
     <div class="baseimg"></div>
+    <welcome-w>
+        style
+            include style/welcome.css
+        include includes/welcome.pug
+        script
+            include script/welcome.js
+    </welcome-w>
 </body>
 </html>

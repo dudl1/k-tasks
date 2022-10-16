@@ -17,7 +17,9 @@ for (let i = 0; i < menuChat.length; i++)
         const cardMask = elem.parentElement.parentElement;
         const inputActive = elem.previousSibling.childNodes[0];
 
-        svgMenuChat.classList.add("activeInputMenu"),
+        console.log(inputActive)
+
+        svgMenuChat.classList.add("activeInputMenu");
         cardMask.classList.add("activeInputMenu"),
         inputActive.classList.add("activeInputMenu");
 
@@ -79,7 +81,6 @@ for (let i = 0; i < menuChat.length; i++)
 async function handleImageUpload(event)
 {
     const imageFile = event.target.files[0];
-    //console.log(`Оригинальный размер ${imageFile.size / 1024 / 1024} MB`);
 
     const options =
     {
@@ -91,7 +92,6 @@ async function handleImageUpload(event)
     try
     {
         const compressedFile = await imageCompression(imageFile, options);
-        //console.log(`Сжатое фото ${compressedFile.size / 1024 / 1024} MB`);
         var reader = new FileReader();
         reader.readAsDataURL(compressedFile); 
         reader.onloadend = function()
@@ -102,13 +102,3 @@ async function handleImageUpload(event)
         return false;
     }
 }
-
-/*document.querySelector(".sM-input").addEventListener("change", function()
-{
-    var file = this.files[0];
-    var reader = new FileReader();
-    reader.onloadend = function() {
-        document.querySelector(".baseimg").innerHTML = reader.result;
-    }
-    reader.readAsDataURL(file);
-})*/

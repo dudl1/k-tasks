@@ -1,6 +1,6 @@
 const socket = io();
 
-const public = document.getElementById("public");
+const publicM = document.getElementById("public");
 const card = document.querySelectorAll(".card-wrap");
 
 const HTMLMsgDialog = document.createElement("msg-dialog");
@@ -14,7 +14,62 @@ function msgDialog()
         for (let sas = 0; sas < msgDiv.length; sas++) {
             const msgClick = msgDiv[sas];
 
-            let link = window.location.pathname.replace(/[^a-zа-яё]/gi, '');
+            let x = null;
+            msgClick.addEventListener('touchstart', e => x = e.touches[0].clientX);
+            msgClick.addEventListener('touchmove', e => {
+                e.stopImmediatePropagation();
+                if (!x) return;
+                x = x - e.touches[0].clientX < 0 ? 0 : -300;
+                msgClick.style.transform = `translate(${x}%,0) scale(0.98)`;
+                msgClick.style.opacity = `0`;
+                x = null;
+
+                setTimeout(() => {
+                    let link = window.location.pathname.replace(/[^a-zа-яё]/gi, '');
+                    let id = msgClick.getAttribute("n-msg");
+                    
+                    let msgDeleteJSON = {"link": link, "id": id};
+                    socket.emit("delete", msgDeleteJSON);
+                }, 400);
+            });
+
+            msgClick.onclick = ()=>
+            {
+                const cloneImg = msgClick.children[0] .cloneNode(true);
+                cloneImg.style.marginTop = `${50}px`;
+                cloneImg.classList.add("cloneImg");
+                msgClick.parentNode.parentNode.append(cloneImg);
+
+                msgClick.parentNode.style.pointerEvents = `none`;
+
+                // ADD SCRIPT TO ZOOM IMG
+                const addScriptModule = document.createElement("script");
+                addScriptModule.classList.add("special");
+                addScriptModule.setAttribute("type", "module");
+                addScriptModule.innerHTML = `import WZoom from "https://cdn.skypack.dev/vanilla-js-wheel-zoom";const cloneImgSwipe = document.querySelector(".cloneImg");WZoom.create(cloneImgSwipe, {    type: 'image',    width: 100,    height: 100,    minScale: 1,    maxScale: 5,    speed: 8,});`;
+                document.body.insertAdjacentElement("beforebegin", addScriptModule);
+
+                const cloneImgSwipe = document.querySelector(".cloneImg");
+
+                let x = null;
+                msgClick.parentNode.previousSibling.addEventListener('touchstart', e => x = e.touches[0].clientX);
+                msgClick.parentNode.previousSibling.addEventListener('touchmove', e => {
+                    if (!x) return;
+                    x = x - e.touches[0].clientX < 0 ? 0 : -90;
+                    cloneImgSwipe.style.transform = `translate(${x}%,0)`;
+                    cloneImgSwipe.style.opacity = `0`;
+                    x = null;
+
+                    setTimeout(() => {
+                        cloneImgSwipe.remove();
+                        msgClick.parentNode.style.pointerEvents = `all`;
+                        addScriptModule.remove();
+                    }, 400);
+                })
+
+            }
+
+            /*let link = window.location.pathname.replace(/[^a-zа-яё]/gi, '');
             let id = msgClick.getAttribute("n-msg");
 
             HTMLMsgDialog.innerHTML = `
@@ -37,7 +92,7 @@ function msgDialog()
                 {
                     setTimeout(() => { HTMLMsgDialog.remove(); }, 300);
                 }
-            }
+            }*/
         }
     }, 500);
 }
@@ -53,14 +108,14 @@ for (let i = 0; i < card.length; i++)
         window.history.pushState({}, "", window.location.pathname + link);
         e.preventDefault();
 
-        public.classList.add("active");
+        publicM.classList.add("active");
 
         let input = parentElem.children[1].children[1].children[1].children[0];
 
         parentElem.classList.add("active");
         parentElem.style.zIndex = `9999`;
         setTimeout(() => {document.body.style.overflowY = `hidden`;}, 300);
-        $('html, body').animate({scrollTop: $("body").offset().top}, 300);
+        $('html, body').animate({scrollTop: $("body").offset().top}, 200);
 
         input.setAttribute("name", link);
         input.setAttribute("autocomplete", "off");
@@ -73,10 +128,13 @@ for (let i = 0; i < card.length; i++)
             e.preventDefault();
             e.stopImmediatePropagation();
 
+            const userData = JSON.parse(localStorage.userData)[0];
+
             const inputData =
             {
                 "id": Date.now(),
                 "link": link,
+                "userName": userData.name,
                 "msg": input.value,
                 "typeCalendar": calendar.innerText <= 4 ? 1 : 0,
                 "dateTo": calendar.innerText,
@@ -98,7 +156,7 @@ for (let i = 0; i < card.length; i++)
 
     addEventListener("popstate", ()=>
     {
-        public.classList.remove("active");
+        publicM.classList.remove("active");
         parentElem.classList.remove("active");
         setTimeout(() => {parentElem.style.zIndex = `0`;}, 300);
         document.body.style.overflowY = `scroll`
@@ -123,6 +181,11 @@ for (let i = 0; i < card.length; i++)
 
         document.querySelector(".calendar").classList.remove("active");
         document.querySelector(".baseimg").innerHTML = '';
+        document.querySelector(".cloneImg")
+            ? document.querySelector(".cloneImg").remove()
+            : false
+        elem.nextSibling.childNodes[2].style.pointerEvents = `all`;
+        document.querySelector(".special").remove();
     })
 }
 
@@ -150,7 +213,7 @@ socket.on("message", function(msg)
             Object.values(msgJSON).map(item =>
                 containerMsg.insertAdjacentHTML("afterbegin", `
                 <div n-msg="${item.id}">
-                    <img src="${item.file}" class="photoChat" draggable="false" />
+                    <img src="${item.file}" class="photoChat" draggable="false" onclick="humm()" />
                     ${item.msg}
                     <div class="lineMsg" style="${item.typeCalendar == 1 ? "display:none;" : ""}"></div>
                     <div class="dateToMsg" style="${
@@ -159,6 +222,7 @@ socket.on("message", function(msg)
                         ${svgCalendar}
                         <span style="margin-left:8px;">${item.dateTo}</span>
                     </div>
+                    <span class="userName" style="${msg.dateTo ? "margin-top: 11px !important" : "margin-top: 28px"}">${item.userName}</span>
                 </div>
                 `)
             );
@@ -176,8 +240,9 @@ socket.on("message", function(msg)
             document.getElementById(`${msg.link}`)
             .insertAdjacentHTML("afterbegin", `
             <div n-msg="${msg.id}">
-            <img src="${msg.file}" class="photoChat" style="${msg.file ? "display:block" : "display:none"}" draggable="false" />
-            ${msg.msg}
+                <img src="${msg.file}" class="photoChat" style="${msg.file ? "display:block" : "display:none"}" draggable="false" onclick="humm()" />
+                ${msg.msg}
+                <span class="userName">${msg.userName}</span>
             </div>`);
         }
 
@@ -186,13 +251,14 @@ socket.on("message", function(msg)
             document.getElementById(`${msg.link}`)
             .insertAdjacentHTML("afterbegin", `
             <div n-msg="${msg.id}">
-                <img src="${msg.file}" class="photoChat" style="${msg.file ? "display:block" : "display:none"}" draggable="false" />
+                <img src="${msg.file}" class="photoChat" style="${msg.file ? "display:block" : "display:none"}" draggable="false" onclick="humm()" />
                 ${msg.msg}
                 <div class="lineMsg"></div>
                 <div class="dateToMsg">
                     ${svgCalendar}
                     <span style="margin-left:8px;">${msg.dateTo}</span>
                 </div>
+                <span class="userName" style="margin-top: 11px !important;">${msg.userName}</span>
             </div>
             `);
         }

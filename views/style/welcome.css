@@ -1,0 +1,142 @@
+welcome-w {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    max-width: 505px;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    z-index: 9;
+    transition: .5s ease-in-out;
+}
+
+.faseEmba {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    opacity: 0;
+    transition: .6s ease-in-out;
+    animation: faseEmba 1.5s 1s forwards;
+}
+
+@keyframes faseEmba {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+.textHealth , .forms {
+    position: absolute;
+    opacity: 0;
+}
+
+.textHealth {
+    margin: 0 auto;
+    top: 190px;
+    width: 250px;
+    height: 100%;
+    text-align: center;
+    font-size: 22px;
+}
+
+.forms {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
+}
+
+.form1,
+.form2,
+.step1,
+.step2 {
+    transition: .2s ease-in-out;
+}
+
+.form1 {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 295px;
+    height: 100%;
+    padding-left: 45px;
+    padding-right: 45px;
+}
+.form1 input {
+    height: 49px;
+    padding: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 1.9px solid #5094BF;
+    border-radius: 13px;
+    outline: none;
+    font-size: 18px;
+    color: #5094BF;
+}
+.form1 input::placeholder {
+    color: #5094BF;
+}
+
+.form2 {
+    position: absolute;
+    display: flex;
+    top: 300px;
+    width: 100%;
+    flex-direction: column;
+    opacity: 0;
+    z-index: -9999;
+    align-items: center;
+}
+
+.prePhoto {
+    display: none;
+    position: absolute;
+    width: 125px;
+    height: 125px;
+    border: none;
+    border-radius: 90px;
+    background: black;
+    object-fit: cover;
+    object-position: center;
+}
+
+.form2 input {
+    content-visibility: hidden;
+    margin-top: -120px;
+    width: 65px;
+    height: 60px;
+    padding: 30px;
+    background: none;
+}
+
+.forms button {
+    position: absolute;
+    bottom: 35px;
+    right: 43px;
+    width: 120px;
+    height: 45px;
+    padding: 0;
+    border: none;
+    border-radius: 13px;
+    outline: 0;
+    font-size: 17px;
+    color: #ffffff;
+    background: #5094BF;
+    cursor: pointer;
+}
+
+welcome-w.wAnim .faseEmba {
+    height: 230px;
+    transform: scale(0.77);
+}
+
+welcome-w.ready .textHealth, .forms {
+    transition: .7s ease-in-out;
+}
+
+welcome-w.finishW {
+    opacity: 0;
+    transition-delay: .3s;
+}

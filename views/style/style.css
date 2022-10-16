@@ -10,7 +10,6 @@ html, body {
     font-family: 'Inter', sans-serif;
     -moz-user-select: none; -webkit-user-select: none; -ms-user-select: none; user-select: none;
     overflow: hidden;
-    overflow-y: scroll;
 }
 
 body {

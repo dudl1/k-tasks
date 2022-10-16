@@ -25,14 +25,14 @@ p {
     transition: .3s ease-in-out;
 }
 
-[data-card="economy"] {background: #FECD48;}
-[data-card="managementTechnologies"] {background: #2ECC71;}
-[data-card="psychology"] {background: #70B3E0;}
-[data-card="organizationTheory"] {background: #FA8175;}
-[data-card="contractSystems"] {background: #E4BEC2;}
-[data-card="businessStatistics"] {background: #B081FE;}
-[data-card="crossCultural"] {background: #E3A177;}
-[data-card="humanResources"] {background: #aabdc7; border-radius: 17px !important;}
+[data-card="managementTechnologies"] {background: #2ECC71; top: 78px;}
+[data-card="economy"] {background: #FECD48; top: 185px;}
+[data-card="psychology"] {background: #70B3E0; top: 292px;}
+[data-card="organizationTheory"] {background: #FA8175; top: 399px;}
+[data-card="businessStatistics"] {background: #B081FE; top: 506px;}
+[data-card="contractSystems"] {background: #E4BEC2; top: 613px;}
+[data-card="crossCultural"] {background: #E3A177; top: 720px;}
+[data-card="humanResources"] {background: #aabdc7; border-radius: 17px !important; top: 827px;}
 
 .card-left,.cL-wrap {
     height: 100%;
@@ -51,7 +51,6 @@ p {
     font-size: 19.5px;
     font-weight: 580;
     color: #000000;
-    /*word-break: break-all;*/
 }
 .card-title,
 .card-mask svg {
@@ -116,7 +115,7 @@ p {
 .menuChat {
     pointer-events: none;
     position: absolute!important;
-    margin: -47px calc(100% - 55px) !important;
+    margin: -49px calc(100% - 55px) !important;
     opacity: 0;
     transition: .2s ease-in-out;
 }
@@ -146,7 +145,7 @@ p {
 
 .containerMsg > div {
     margin-left: 20px;
-    margin-bottom: 13px;
+    margin-bottom: 32px;
     max-width: 350px;
     margin-right: 50px;
     padding: 6px;
@@ -155,7 +154,29 @@ p {
     color: #333;
     fill: #333;
     background: #fff;
+    transition: .2s ease-in-out;
     cursor: pointer;
+}
+
+.cloneImg {
+    position: absolute!important;
+    width: 100%!important;
+    border-radius: 0!important;
+    box-shadow: 0 0 34px 920px rgb(0 0 0 / 88%);
+    transition: .2s ease-in-out;
+    animation-name: cloneImg;
+    animation-duration: .7s;
+    animation-delay: 0s;
+}
+
+@keyframes cloneImg {
+    0%   { transform: scale(1,1)  translateY(0); }
+    10%  { transform: scale(1.1,.9)   translateY(0); }
+    30%  { transform: scale(.9,1.1)   translateY(-20px); }
+    50%  { transform: scale(1.05,.95) translateY(0); }
+    57%  { transform: scale(1,1)      translateY(-7px); }
+    64%  { transform: scale(1,1)      translateY(0); }
+    100% { transform: scale(1,1)      translateY(0);}
 }
 
 .lineMsg {
@@ -167,6 +188,13 @@ p {
 
 .dateToMsg {display: flex;margin-top:7px;user-select: none;}
 .dateToMsg > svg {fill: #333333;opacity:1!important;;}
+
+.userName {
+    position: absolute;
+    margin-top: 28px;
+    left: 26px;
+    font-size: 13px;
+}
 
 .card.active {
     grid-template-columns: 0%;
@@ -235,4 +263,18 @@ p {
 
 .card.active .svgCalendar {
     opacity: 1 !important;
+}
+
+img .imgFly {
+    display: block;
+    position: absolute;
+    margin: auto;
+    top: 30%;
+    bottom: 30%;
+    width: 100%;
+    padding-top: 100%;
+    padding-bottom: 100%;
+    object-fit: contain;
+    background: black;
+    z-index: 99999;
 }

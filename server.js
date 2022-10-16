@@ -10,6 +10,7 @@ const { createClient } = require("@supabase/supabase-js");
 const { v4: uuid4 } = require("uuid");
 
 
+app.use(express.static('views'));
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/views/index.html');
 });
@@ -65,6 +66,7 @@ io.on("connection", (socket)=>
                 .insert([{
                     id: msg.id,
                     link: msg.link,
+                    userName: msg.userName,
                     msg: msg.msg,
                     typeCalendar: msg.typeCalendar,
                     dateTo: msg.dateTo,
