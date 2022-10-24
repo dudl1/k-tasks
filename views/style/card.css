@@ -147,7 +147,7 @@ p {
     margin-left: 20px;
     margin-bottom: 32px;
     max-width: 350px;
-    margin-right: 50px;
+    margin-right: 80px;
     padding: 6px;
     border-radius: 7px;
     word-wrap: break-word;
@@ -156,6 +156,7 @@ p {
     background: #fff;
     transition: .2s ease-in-out;
     cursor: pointer;
+    transition: .2s ease-in-out;
 }
 
 .cloneImg {

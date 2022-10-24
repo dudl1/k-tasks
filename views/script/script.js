@@ -14,6 +14,7 @@ function msgDialog()
         for (let sas = 0; sas < msgDiv.length; sas++) {
             const msgClick = msgDiv[sas];
 
+            // SWIPE MSG (DELETE)
             let x = null;
             msgClick.addEventListener('touchstart', e => x = e.touches[0].clientX);
             msgClick.addEventListener('touchmove', e => {
@@ -24,19 +25,42 @@ function msgDialog()
                 msgClick.style.opacity = `0`;
                 x = null;
 
+                HTMLMsgDialog.innerHTML = `
+                    <div class="msgBckg">
+                        <button class="msgDelete">Удалить</button>
+                    </div>
+                `;
+
+                let link = window.location.pathname.replace(/[^a-zа-яё]/gi, '');
+                let id = msgClick.getAttribute("n-msg");
+
                 setTimeout(() => {
-                    let link = window.location.pathname.replace(/[^a-zа-яё]/gi, '');
-                    let id = msgClick.getAttribute("n-msg");
-                    
-                    let msgDeleteJSON = {"link": link, "id": id};
-                    socket.emit("delete", msgDeleteJSON);
+                    document.body.append(HTMLMsgDialog);
+                    document.querySelector(".msgDelete").onclick = ()=>
+                    {
+                        HTMLMsgDialog.remove();
+                        setTimeout(() =>
+                        {
+                            let msgDeleteJSON = {"link": link, "id": id};
+                            socket.emit("delete", msgDeleteJSON);
+                        }, 200);
+                    }
+
+                    document.querySelector("msg-dialog>div").onclick = ()=>
+                    {
+                        HTMLMsgDialog.remove();
+                        setInterval(() => {
+                            msgClick.style.transform = null;
+                            msgClick.style.opacity = `1`;
+                        }, 300);
+                    }
                 }, 400);
             });
 
             msgClick.onclick = ()=>
             {
                 const cloneImg = msgClick.children[0] .cloneNode(true);
-                cloneImg.style.marginTop = `${50}px`;
+                cloneImg.style.marginTop = `30%`;
                 cloneImg.classList.add("cloneImg");
                 msgClick.parentNode.parentNode.append(cloneImg);
 
@@ -170,6 +194,8 @@ for (let i = 0; i < card.length; i++)
 
         const selectMenu = document.querySelector("[data-func=selectMenu]");
         funcElem.append(selectMenu);
+
+        HTMLMsgDialog.remove();
 
         parentElem.childNodes[1].classList.remove("activeInputMenu");
         parentElem.childNodes[1].childNodes[1].childNodes[1].childNodes[0].classList.remove("activeInputMenu");
